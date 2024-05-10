@@ -16,6 +16,11 @@ app.get("/", async (request, response) => {
 app.get("/:id", async (request, response) => {
   createNotes();
   const { id } = request.params;
+
+  if (isNaN(parseInt(id))) {
+    return response.status(400).send("Invalid ID");
+  }
+
   const { rows } = await postgres.sql`
   SELECT * FROM notes WHERE id = ${id}
   `;
