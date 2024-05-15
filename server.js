@@ -102,7 +102,6 @@ app.put("/:user/:note", async (request, response) => {
       WHERE id = ${note} AND "userId" = (
         SELECT id FROM users WHERE username = ${user}
       )
-      RETURNING *;
     `;
 
     if (res.rowCount > 0) {
