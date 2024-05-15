@@ -1,6 +1,11 @@
 {
+  "main": "server.js",
+  "script": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "@vercel/postgres": "^0.8.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2"
   }
 }
