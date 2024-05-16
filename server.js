@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const { createTables } = require("./lib/db");
 const { createUser } = require("./controller/users");
@@ -12,6 +13,7 @@ const {
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", async (request, response) => {
   createTables();
