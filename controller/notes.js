@@ -5,7 +5,8 @@ const getAllNotes = async (request, response) => {
 
   try {
     const res = await postgres.sql`
-        SELECT * FROM notes
+        SELECT notes.id, notes.content, users.username
+        FROM notes
         JOIN users ON notes."userId" = users.id
         WHERE UPPER(users.username) = UPPER(${user})
       `;
@@ -43,7 +44,8 @@ const getIndividualNote = async (request, response) => {
 
   try {
     const res = await postgres.sql`
-        SELECT * FROM notes
+        SELECT notes.id, notes.content, users.username
+        FROM notes
         JOIN users ON notes."userId" = users.id
         WHERE notes.id = ${note} AND UPPER(users.username) = UPPER(${user});
       `;
@@ -57,7 +59,6 @@ const getIndividualNote = async (request, response) => {
     response.send(`Something went wrong. ${error}`);
   }
 };
-
 const updateIndividualNote = async (request, response) => {
   const { user, note } = request.params;
   const { content } = request.body;
