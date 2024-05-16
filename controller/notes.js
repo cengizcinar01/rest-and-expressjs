@@ -73,13 +73,13 @@ const updateIndividualNote = async (request, response) => {
       `;
 
     if (res.rowCount > 0) {
-      response.send(
-        `Note with ID ${note} updated successfully for user ${user}.`
-      );
+      response.send({
+        message: `Note with ID ${note} updated successfully for user ${user}.`,
+      });
     } else {
-      response.send(
-        `Note with ID ${note} not found or does not belong to user ${user}.`
-      );
+      response.send({
+        message: `Note with ID ${note} not found or does not belong to user ${user}.`,
+      });
     }
   } catch (error) {
     response.send(`Something went wrong. ${error}`);
