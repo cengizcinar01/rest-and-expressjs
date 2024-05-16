@@ -30,9 +30,9 @@ const createNote = async (request, response) => {
       await postgres.sql`INSERT INTO notes (content, "userId") VALUES (${content}, (SELECT id FROM users WHERE username = ${user}))`;
 
     if (res.rowCount > 0) {
-      response.send("Note was created successfully.");
+      response.send({ message: "Note was created successfully." });
     } else {
-      response.send("Note could NOT be created.");
+      response.send({ message: "Note could NOT be created." });
     }
   } catch (error) {
     response.send(`Something went wrong. ${error}`);
@@ -98,9 +98,9 @@ const deleteIndividualNote = async (request, response) => {
       `;
 
     if (res.rowCount > 0) {
-      response.send(`Note with ID ${note} deleted successfully.`);
+      response.send({ message: `Note with ID ${note} deleted successfully.` });
     } else {
-      response.send(`Note with ID ${note} not found.`);
+      response.send({ message: `Note with ID ${note} not found.` });
     }
   } catch (error) {
     response.send(`Something went wrong. ${error}`);
