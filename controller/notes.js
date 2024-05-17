@@ -31,10 +31,7 @@ const createNote = async (request, response) => {
 
     if (res.rowCount > 0) {
       const noteId = res.rows[0].id;
-      response.send(
-        { message: "Note was created successfully." },
-        { noteId: noteId }
-      );
+      response.send({ message: "Note was created successfully.", noteId });
     } else {
       response.send({ message: "Note could NOT be created." });
     }
