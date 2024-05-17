@@ -27,11 +27,10 @@ const createNote = async (request, response) => {
 
   try {
     const res =
-      await postgres.sql`INSERT INTO notes (content, "userId") VALUES (${content}, (SELECT id FROM users WHERE username = ${user})) RETURNING id`;
+      await postgres.sql`INSERT INTO notes (content, "userId") VALUES (${content}, (SELECT id FROM users WHERE username = ${user}))`;
 
     if (res.rowCount > 0) {
-      const noteId = res[0].id;
-      response.send({ message: "Note was created successfully.", noteId });
+      response.send({ message: "Note was created successfully." });
     } else {
       response.send({ message: "Note could NOT be created." });
     }
