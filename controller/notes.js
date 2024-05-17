@@ -71,11 +71,14 @@ const updateIndividualNote = async (request, response) => {
         WHERE id = ${note} AND "userId" = (
           SELECT id FROM users WHERE UPPER(users.username) = UPPER(${user})
         )
+        RETURNING id
       `;
 
     if (res.rowCount > 0) {
+      const noteId = res.rows[0].id;
       response.send({
         message: `Note with ID ${note} updated successfully for user ${user}.`,
+        noteId,
       });
     } else {
       response.send({
