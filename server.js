@@ -17,7 +17,9 @@ app.use(cors());
 
 app.get("/", async (request, response) => {
   createTables();
-  response.send({ message: "Welcome to the note-taking app!" });
+  response.send({
+    message: "Welcome to the note-taking app!",
+  });
 });
 
 app.post("/", createUser);
